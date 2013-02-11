@@ -29,7 +29,8 @@ if args.count("build_ext") > 0 and args.count("--inplace") == 0:
 # Only build for 64-bit target
 os.environ['ARCHFLAGS'] = "-arch x86_64"
 
-# Set up extension and build
+# Set up extension(s) and build
+# You can add as many extensions as you need
 cy_ext = Extension("cy_ext",
                    ["cy_ext.pyx"],
                    include_dirs=[np.get_include()],
@@ -37,5 +38,6 @@ cy_ext = Extension("cy_ext",
                    #extra_link_args=["-g"]
                    )
 
+# Pass all extensions created above in  list to ext_modules argument
 setup(cmdclass={'build_ext': build_ext},
       ext_modules=[cy_ext])
